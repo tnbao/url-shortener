@@ -25,11 +25,12 @@ export default function Home() {
   const onShorten = async () => {
     if (!link) return
 
-    setInProgress(true)
     if (!isValidUrl(link)) {
       alert('Not a valid URL')
+      return
     }
 
+    setInProgress(true)
     const res = await axios.post(lambdaUrl, { link }, axiosConfig)
     if (res) {
       setShortLink(res.data)
